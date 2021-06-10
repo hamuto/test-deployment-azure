@@ -37,8 +37,8 @@ jobs:
 
       - name: Check SSH connection
         run: |
-          echo $SSH_KEY | sed 's/./& /g'
-          echo test, and deploy your project.
+          echo $SSH_KEY > KeyAlgoflex.pem
+          ssh -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "rm -rf app/"
         env:
           SSH_KEY: ${{secrets.AWS_KEY_PEM}}
     
