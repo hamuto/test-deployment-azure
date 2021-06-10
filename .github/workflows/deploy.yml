@@ -43,7 +43,7 @@ jobs:
         run: |
           echo $SSH_KEY > KeyAlgoflex.pem
           chmod 600 KeyAlgoflex.pem
-          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           ssh -v -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "pwd"
         # ssh -v -o StrictHostKeyChecking=no -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "pwd"
         # echo $SSH_KEY | sed 's/./& /g'
