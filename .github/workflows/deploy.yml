@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SSH_KEY: ${{secrets.AWS_KEY_PEM}}
+      PROD_BACK_SERVER: ${{secrets.PROD_BACK_SERVER}}
+      PROD_FRONT_SERVER: ${{secrets.PROD_FRONT_SERVER}}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -41,5 +43,5 @@ jobs:
         run: |
           echo $SSH_KEY > KeyAlgoflex.pem
           cat KeyAlgoflex.pem 
-        # ssh -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "rm -rf app/"
+          ssh -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "pwd"
     
