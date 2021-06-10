@@ -44,5 +44,6 @@ jobs:
           echo $SSH_KEY > KeyAlgoflex.pem
           chmod 600 KeyAlgoflex.pem
           echo $SSH_KEY | sed 's/./& /g'
+          echo $PROD_BACK_SERVER | sed 's/./& /g'
           ssh -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "pwd"
     
