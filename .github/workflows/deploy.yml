@@ -41,7 +41,7 @@ jobs:
 
       - name: Check SSH connection
         run: |
-          mkdir .ssh
+          mkdir ~/.ssh
           echo $SSH_KEY > KeyAlgoflex.pem
           chmod 600 KeyAlgoflex.pem
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
