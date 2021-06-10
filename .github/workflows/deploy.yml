@@ -22,9 +22,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - env:
-          AWS_KEY_PEM: ${{ secrets.AWS_KEY_PEM }}
-
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
@@ -40,5 +37,8 @@ jobs:
 
       - name: Check SSH connection
         run: |
+          echo "$SSH_KEY"
           echo $env:AWS_KEY_PEM
           echo test, and deploy your project.
+        env:
+          SSH_KEY: ${{secrets.AWS_KEY_PEM}}
