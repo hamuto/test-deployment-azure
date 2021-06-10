@@ -45,6 +45,7 @@ jobs:
             StrictHostKeyChecking no
           END
           echo "Hello World"
+          cat ~/.ssh/config
 #          ssh staging "pwd"
 #       - name: Check SSH connection
 #         run: |
