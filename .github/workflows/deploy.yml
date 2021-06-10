@@ -44,7 +44,8 @@ jobs:
             IdentityFile ~/.ssh/KeyAlgoflex.pem
             StrictHostKeyChecking no
           END
-          ssh staging "pwd"
+          echo "Hello World"
+#          ssh staging "pwd"
 #       - name: Check SSH connection
 #         run: |
 #          mkdir ~/.ssh
