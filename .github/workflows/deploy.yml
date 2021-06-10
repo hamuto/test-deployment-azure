@@ -23,8 +23,8 @@ jobs:
       SSH_KEY: ${{secrets.AWS_KEY_PEM}}
       SSH_BACK_USER: ${{ secrets.SSH_BACK_USER }}
       SSH_FRONT_USER: ${{ secrets.SSH_FRONT_USER }}
-      PROD_BACK_SERVER: ${{secrets.PROD_BACK_SERVER}}
-      PROD_FRONT_SERVER: ${{secrets.PROD_FRONT_SERVER}}
+      HOST_PROD_BACK_SERVER: ${{secrets.HOST_PROD_BACK_SERVER}}
+      HOST_PROD_FRONT_SERVER: ${{secrets.HOST_PROD_FRONT_SERVER}}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -39,7 +39,7 @@ jobs:
           chmod 600 ~/.ssh/KeyAlgoflex.pem
           cat >>~/.ssh/config <<END
           Host staging
-            HostName $PROD_BACK_SERVER
+            HostName $HOST_PROD_BACK_SERVER
             User $SSH_BACK_USER
             IdentityFile ~/.ssh/KeyAlgoflex.pem
             StrictHostKeyChecking no
