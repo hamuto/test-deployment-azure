@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SSH_KEY: ${{secrets.AWS_KEY_PEM}}
+      SSH_BACK_USER: ${{ secrets.SSH_BACK_USER }}
+      SSH_FRONT_USER: ${{ secrets.SSH_FRONT_USER }}
       PROD_BACK_SERVER: ${{secrets.PROD_BACK_SERVER}}
       PROD_FRONT_SERVER: ${{secrets.PROD_FRONT_SERVER}}
 
@@ -29,25 +31,29 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # Step for Back deployment
+      - name: Back deployment
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/KeyAlgoflex.pem
+          chmod 600 ~/.ssh/KeyAlgoflex.pem
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $PROD_BACK_SERVER
+            User $SSH_BACK_USER
+            IdentityFile ~/.ssh/KeyAlgoflex.pem
+            StrictHostKeyChecking no
+          END
 
-      - name: Check SSH connection
-        run: |
-          mkdir ~/.ssh
-          echo $SSH_KEY > KeyAlgoflex.pem
-          chmod 600 KeyAlgoflex.pem
-          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-          ssh -v -i KeyAlgoflex.pem ubuntu@ec2-35-180-253-31.eu-west-3.compute.amazonaws.com "pwd"
-        # ssh -v -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "pwd"
-        # ssh -v -o StrictHostKeyChecking=no -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "pwd"
-        # echo $SSH_KEY | sed 's/./& /g'
-        # echo $PROD_BACK_SERVER | sed 's/./& /g'
+#       - name: Check SSH connection
+#         run: |
+#          mkdir ~/.ssh
+#          echo $SSH_KEY > KeyAlgoflex.pem
+#          chmod 600 KeyAlgoflex.pem
+#          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+#          ssh -v -i KeyAlgoflex.pem ubuntu@ec2-35-180-253-31.eu-west-3.compute.amazonaws.com "pwd"
+#         ssh -v -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "pwd"
+#         ssh -v -o StrictHostKeyChecking=no -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "pwd"
+#         echo $SSH_KEY | sed 's/./& /g'
+#         echo $PROD_BACK_SERVER | sed 's/./& /g'
     
