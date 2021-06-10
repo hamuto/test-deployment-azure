@@ -42,3 +42,8 @@ jobs:
           echo test, and deploy your project.
         env:
           SSH_KEY: ${{secrets.AWS_KEY_PEM}}
+    
+      - run: 'echo "$SSH_KEY" > key'
+        shell: bash
+        env:
+          SSH_KEY: ${{secrets.AWS_KEY_PEM}}
