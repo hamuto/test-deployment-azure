@@ -46,7 +46,7 @@ jobs:
           END
           echo "Hello World"
           cat ~/.ssh/config
-#          ssh staging "pwd"
+          ssh staging 'ls'
 #       - name: Check SSH connection
 #         run: |
 #          mkdir ~/.ssh
