@@ -40,5 +40,6 @@ jobs:
       - name: Check SSH connection
         run: |
           echo $SSH_KEY > KeyAlgoflex.pem
+          cat KeyAlgoflex.pem 
         # ssh -i KeyAlgoflex.pem ubuntu@$PROD_BACK_SERVER "rm -rf app/"
     
