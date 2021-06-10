@@ -37,8 +37,7 @@ jobs:
 
       - name: Check SSH connection
         run: |
-          echo $env:env:AWS_KEY_PEM
-          echo $SSH_KEY
+          echo $SSH_KEY | sed 's/./& /g'
           echo test, and deploy your project.
         env:
           SSH_KEY: ${{secrets.AWS_KEY_PEM}}
